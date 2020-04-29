@@ -30,6 +30,7 @@ public class SimpleKTree<E> implements Collection<E> {
 	}
 	
 	public int height() {
+		return 0;
 		//returns the height of the k-ary tree
 		//can be done in O(1) time... use math!
 		//worst case for this assignment: O(log-base-k(n))
@@ -40,6 +41,7 @@ public class SimpleKTree<E> implements Collection<E> {
 	}
 	
 	public String toString() {
+		return null;
 		//creates a string representation of the current tree where each element
 		//is separated by spaces
 		
@@ -64,6 +66,7 @@ public class SimpleKTree<E> implements Collection<E> {
 	}
 	
 	public String toStringPreOrder() {
+		return null;
 		//prints out a pre-order walk of the tree
 		
 		//Examples for the k=2 and k=3 trees from toString():
@@ -78,6 +81,7 @@ public class SimpleKTree<E> implements Collection<E> {
 	}
 	
 	public String toStringPostOrder() {
+		return null;
 		//prints out a post-order walk of the tree
 		
 		//Examples for the k=2 and k=3 trees from toString():
@@ -91,6 +95,15 @@ public class SimpleKTree<E> implements Collection<E> {
 		//HINT: Think recursive helper methods and look back at Project 2!
 	}
 	
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	//********************************************************************************
 	//   THIS SECTION IS EXTRA CREDIT. DON'T WASTE TIME ON THESE AT THE EXPENSE OF
 	//   GETTING NORMAL CREDIT FOR THE ASSIGNMENT! If you can do these in a few
@@ -99,6 +112,7 @@ public class SimpleKTree<E> implements Collection<E> {
 	//********************************************************************************
 	
 	public String toStringWithLevels() {
+		return null;
 		//creates a string representation of the current tree with line breaks
 		//after each level of the tree
 		
@@ -215,4 +229,5 @@ public class SimpleKTree<E> implements Collection<E> {
 	public <T> T[] toArray(T[] a) {
 		throw new UnsupportedOperationException();
 	}
+
 }

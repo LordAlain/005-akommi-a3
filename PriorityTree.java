@@ -97,4 +97,34 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 		b = tree1.isEmpty();
 		*/
 	}
+
+	@Override
+	public boolean offer(E e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public E remove() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public E poll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public E element() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public E peek() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
