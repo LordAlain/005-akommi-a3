@@ -16,7 +16,7 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 	
 	private Comparator<? super E> comp;
 	
-	public PriorityTree(Comparator<? super E> comp, int k) {
+	public PriorityTree(Comparator<? super E> comp, int k)  {
 		//constructor which takes a comparator to be used later when adding/swapping
 		//values in the queue and the k value of the k-ary tree
 		
@@ -24,6 +24,8 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 		//see: http://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html
 		//it's just a way of comparing objects using something other than their
 		//"natural ordering"
+
+		super(k);
 	}
 	
 	public PriorityTree(Comparator<? super E> comp, E[] arrayTree, int k) {
@@ -35,7 +37,7 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 		
 		//DO NOT DELETE METHODS YOU DON'T COMPLETE.
 		
-		super(-1);
+		super(arrayTree, k);
 	}
 	
 	//you code here
