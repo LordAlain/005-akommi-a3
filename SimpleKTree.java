@@ -11,12 +11,12 @@ import java.util.ArrayList;
 public class SimpleKTree<E> implements Collection<E> {
 	//you code here
 	//private or protected fields only
-	private ArrayList<E> nodeList;
+	protected ArrayList<E> nodeList;
 
 	/**
 	 * Number of max child per parent node = K.
 	 */
-	private int maxK;
+	protected int maxK;
 
 	//Notes: for this assignment, you may assume that the tree is always nearly complete
 	//this will significantly simplify both your size() and height() methods
@@ -59,20 +59,40 @@ public class SimpleKTree<E> implements Collection<E> {
 		//can be done in O(1) time... use math!
 		//worst case for this assignment: O(log-base-k(n))
 
-		return height(nodeList.size());
+		return height(nodeList.size()-1);
 	}
 	
-	private int height(int n) {
+	/**
+	 * height of tree at index
+	 * @param index
+	 * @return
+	 */
+	protected int height(int index) {
 		//returns the height of the k-ary tree
 		//can be done in O(1) time... use math!
 		//worst case for this assignment: O(log-base-k(n))
 
-		if (n == 0) {
+		int n = index + 1;
+		if (n == 0 || index < 0) {
 			return 0;
 		}
 
 		double maxHeight = (Math.log((n*maxK)-n+1)/Math.log(maxK));
 		return (int) Math.ceil(maxHeight)-1;
+	}
+	
+	/**
+	 * height of tree at index
+	 * @param index
+	 * @return
+	 */
+	protected int getIndexOfParent(int index) {
+
+		if (index <= 0)
+			return 0;
+
+		int n = (index - 1) / maxK;
+		return n;
 	}
 
 	public void clear() {
@@ -246,7 +266,7 @@ public class SimpleKTree<E> implements Collection<E> {
 			int prevHeight = 0;
 			int currHeight = 0;
 			for (int i = 0; i < size()-1; i++) {
-				currHeight = height(i+1);
+				currHeight = height(i);
 				if (prevHeight < currHeight){
 					prevHeight = currHeight;
 					strLevel += "\n" + nodeList.get(i) + " ";
@@ -282,7 +302,7 @@ public class SimpleKTree<E> implements Collection<E> {
 		System.out.println("Yay 1");
 
 		try {
-			//tree1 = new SimpleKTree<>(1);
+			tree1 = new SimpleKTree<>(1);
 			System.out.println("Nay 1");
 		} catch (InvalidKException e) {
 			System.out.println("Yay 2");
