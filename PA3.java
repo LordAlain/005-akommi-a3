@@ -17,6 +17,10 @@ public class PA3 {
 		//Note: Sorting in any way other than with a heap will result in a 0
 		//for this method... you have been warned! This can be done in 3 lines
 		//of code, but is more readable in 6-8.
+		PriorityTree<T> tree = new PriorityTree<>(comp, values, 2);
+		for (int i = 0; i < values.length; i++) {
+			values[i] = tree.remove();
+		}
 	}
 	
 	
@@ -94,7 +98,7 @@ public class PA3 {
 						for(int i = 0; i < valueStrings.length; i++) {
 							values[i] = Integer.parseInt(valueStrings[i]);
 						}
-						PA3.heapsort(values, revComp);
+						PA3.heapsort(values, compToUse);
 						System.out.print("Sorted: ");
 						for(Integer value : values) System.out.print(value + " ");
 						System.out.println();
