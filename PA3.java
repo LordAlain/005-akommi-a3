@@ -3,8 +3,17 @@ import java.util.Comparator;
 
 //You _must_ submit this class with your assignment for full credit. You may not
 //edit any of the provided code (except to add JavaDocs).
+/**
+ * The testing class that uses Priority tree to perform heapsort.
+ */
 public class PA3 {
 	
+	/**
+	 * Uses a Priority Tree to perform heapify then removes for a proper heapsort.
+	 * @param <T> handles any object arrays.
+	 * @param values the values that need to be sorted.
+	 * @param comp the comparison type for the objects.
+	 */
 	public static <T> void heapsort(T[] values, Comparator<T> comp) {
 		//Your code here... you may add everything to a heap and then remove each item
 		//or you may use the "heapify constructor", and then remove everything, whichever
@@ -17,6 +26,7 @@ public class PA3 {
 		//Note: Sorting in any way other than with a heap will result in a 0
 		//for this method... you have been warned! This can be done in 3 lines
 		//of code, but is more readable in 6-8.
+
 		PriorityTree<T> tree = new PriorityTree<>(comp, values, 2);
 		for (int i = 0; i < values.length; i++) {
 			values[i] = tree.remove();
@@ -29,6 +39,10 @@ public class PA3 {
 	// specifically be interested in editing the commented out line lower down).
 	//********************************************************************************
 	
+	/**
+	 * Main method for testing code.
+	 * @param arg no args.
+	 */
 	public static void main(String[] arg) {
 		Comparator<Integer> revComp = new Comparator<Integer>() {
 			public int compare(Integer o1, Integer o2) {
@@ -122,6 +136,14 @@ public class PA3 {
 		while(choice != 4);
 	}
 	
+	/**
+	 * Forces user to input a valid integer input within a certain range.
+	 * @param input the original input from the user.
+	 * @param prompt the prompt for the user.
+	 * @param min the min value of the choice.
+	 * @param max the max value of the choice.
+	 * @return choice - the user input within the bounds.
+	 */
 	private static int forceIntChoice(Scanner input, String prompt, int min, int max) {
 		int choice = -1;
 		while(choice == -1) {

@@ -9,16 +9,25 @@ import java.util.Comparator;
 //IMPORTANT: This class _extends_ SimpleKTree, don't re-implement anything here, use inheritance!
 
 //NOTE: You may assume null values are not allowed in the Queue.
-
+/**
+ * The Priority tree class that inherits simpleKTree and implements to form a generic priority heap.
+ * @param <E> Can handle any type of object.
+ */
 public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 	//you code here
 	//private or protected fields only
 	
+	/**
+	 * The Comparator object initialization.
+	 */
 	private Comparator<? super E> comp;
 	
+	/**
+	 * Constructor which takes a comparator to be used later when adding/swapping values in the queue and the k value of the k-ary tree.
+	 * @param comp the type of comparison used.
+	 * @param k the k-value of the heap.
+	 */
 	public PriorityTree(Comparator<? super E> comp, int k)  {
-		//constructor which takes a comparator to be used later when adding/swapping
-		//values in the queue and the k value of the k-ary tree
 		
 		//if you are unfamiliar with the Comparator interface, you can find it here:
 		//see: http://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html
@@ -30,6 +39,12 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 
 	}
 	
+	/**
+	 * Takes an array representation of a tree to create the queue and forms the heap from the bottom up.
+	 * @param comp the type of comparison used.
+	 * @param arrayTree the array tree passed for the heapify.
+	 * @param k the k-value of the heap.
+	 */
 	public PriorityTree(Comparator<? super E> comp, E[] arrayTree, int k) {
 		//OPTIONAL METHOD (you do not get extra points for doing it, just an imaginary pat on the
 		//back). Takes an array representation of a tree and performs "heapify" to create the queue
@@ -50,7 +65,12 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 	
 	//you code here
 	//private or protected methods only (except those required by the Queue interface)
-	
+	/**
+	 * Takes an array representation of a tree to create the queue and forms the heap from the bottom up.
+	 * @param comp the type of comparison used.
+	 * @param arrayTree the array tree passed for the heapify.
+	 * @param k the k-value of the heap.
+	 */
 	private void heapify(Comparator<? super E> comp, E[] arrayTree, int k) {
 		int i = arrayTree.length - 1;
 		while (i >= 0) {
@@ -59,6 +79,14 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 		}
 	}
 
+	/**
+	 * PercDown - Percolates node as far down as needed - ie. Swaps parent with min Value child recursively. Used for heapify.
+	 * @param <E> Any object type.
+	 * @param comp the type of comparison used.
+	 * @param arrayTree the array tree passed for the heapify.
+	 * @param k the k-value of the heap.
+	 * @param parentIndex the parent index that needs to be percolated down.
+	 */
 	private static <E> void percDown(Comparator<? super E> comp, E[] arrayTree, int k, int parentIndex)
 	{
 		//System.out.println("percDown: start, parentIndex : " + parentIndex + ", arrayTree = " + toString(arrayTree));
@@ -86,19 +114,14 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 			percDown(comp, arrayTree, k, swapIndex);
 		}
 	}
-	
-	private static <E> String toString(E[] arrayTree)
-	{
-		String s = "";
-		for (int i = 0; i < arrayTree.length; i++)
-			s = s + arrayTree[i].toString() + " ";
-		return s;
-	}
 
 	//********************************************************************************
 	// Testing code... edit this as much as you want!
 	//********************************************************************************
-	
+	/**
+	 * Main method for testing code.
+	 * @param arg no args.
+	 */
 	public static void main(String[] arg) {
 		//maybe add some yays?
 		
@@ -106,8 +129,10 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 		//When you think you're ready for testing, uncomment this block. It's a
 		//secondary check to make sure your code compiles with the test cases used
 		//for grading.
-		
 
+		/**
+		 * Random Object Class for testing.
+		 */
 		class Banana { int size; }
 		
 		int x, x1, x2;
@@ -150,9 +175,7 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 		};
 		
 		tree1 = new PriorityTree<>(comp, 2);
-		tree2 = new PriorityTree<>(revComp, new String[] {"a", "b", "c"}, 7);
-		
-		
+		tree2 = new PriorityTree<>(revComp, new String[] {"a", "b", "c"}, 7);		
 		tree3 = new PriorityTree<>(intComp, 2);
 
 		String k2walk = tree1.toString();
@@ -294,33 +317,64 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 		} catch (NoSuchElementException e) {
 			System.out.println("Yay 6");
 		}
+
+		// Given tests
+
+		x = 0;
+		s = "";
+		b = false;
+		tree1 = new PriorityTree<>(comp, 2);
+		tree2 = new PriorityTree<>(revComp, new String[] {"a", "b", "c"}, 7);
 		
-		x = tree1.height();
-		tree1.clear();
-		s = tree1.toString();
-		s = tree1.toStringPreOrder();
-		s = tree1.toStringPostOrder();
-		s = tree1.toStringWithLevels();
-		x = tree1.size();
-		b = tree1.isEmpty();
-
-
+		b = tree1.add(new Banana());	System.out.println("tree1.add(new Banana()) = " + b);
+		b = tree1.offer(new Banana());	System.out.println("tree1.offer(new Banana()) = " + b);
+		a = tree1.element();			System.out.println("tree1.element() = " + a);
+		a = tree1.peek();				System.out.println("tree1.peek() = " + a);
+		a = tree1.poll();				System.out.println("tree1.poll() = " + a);
+		a = tree1.remove();				System.out.println("tree1.remove() = " + a);
+		
+		x = tree1.height();				System.out.println("tree1.height()" + x);
+		// tree1.clear();
+		s = tree2.toString(); 			System.out.println("tree1.toString() = " + s);
+		s = tree2.toStringPreOrder();	System.out.println("tree1.toStringPreOrder() = " + s);
+		s = tree2.toStringPostOrder();	System.out.println("tree1.toStringPostOrder() = " + s);
+		s = tree2.toStringWithLevels();	System.out.println("tree1.toStringWithLevels() = " + s);
+		x = tree2.size();				System.out.println("tree1.size() = " + x);
+		b = tree2.isEmpty();			System.out.println("tree1.isEmpty() = " + b);
 	}
 
 
+	
+	/**
+     * Inserts the specified element into this queue if it is possible to do so
+     * immediately without violating capacity restrictions, returning
+     * {@code true} upon success and throwing an {@code IllegalStateException}
+     * if no space is currently available.
+     *
+     * @param e the element to add
+     * @return {@code true} (as specified by {@link Collection#add})
+     * @throws NullPointerException if the specified element is null and
+     *         this queue does not permit null elements
+     */
 	@Override
-	public boolean add(E e) {
-		// throw exceptions
-		// ClassCastException - if the class of the specified element prevents it from being added to this queue
-		// NullPointerException - if the specified element is null and this queue does not permit null elements
-		// IllegalArgumentException - if some property of this element prevents it from being added to this queue
-		
+	public boolean add(E e) {		
 		boolean s = offer(e);
 		if (!s)
 			throw new NullPointerException();
 		return s;
 	}
 
+	/**
+     * Inserts the specified element into this queue if it is possible to do
+     * so immediately without violating capacity restrictions.
+     * When using a capacity-restricted queue, this method is generally
+     * preferable to {@link #add}, which can fail to insert an element only
+     * by throwing an exception.
+     *
+     * @param e the element to add
+     * @return {@code true} if the element was added to this queue, else
+     *         {@code false}
+     */
 	@Override
 	public boolean offer(E e) {
 		if (e == null){
@@ -364,6 +418,14 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 		return true;
 	}
 
+	/**
+     * Retrieves and removes the head of this queue.  This method differs
+     * from {@link #poll() poll()} only in that it throws an exception if
+     * this queue is empty.
+     *
+     * @return the head of this queue
+     * @throws NoSuchElementException if this queue is empty
+     */
 	@Override
 	public E remove() {
 		E head = poll();
@@ -373,6 +435,12 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 		return head;
 	}
 
+	/**
+     * Retrieves and removes the head of this queue,
+     * or returns {@code null} if this queue is empty.
+     *
+     * @return the head of this queue, or {@code null} if this queue is empty
+     */
 	@Override
 	public E poll() {
 		if (peek() == null){
@@ -397,10 +465,9 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 		return head;
 	}
 
-	/***
-	 *  percDown - swap parent with min Value child recursively
-	 * @param parentIndex
-	 * @return
+	/**
+	 * PercDown - Percolates node as far down as needed - ie. Swaps parent with min Value child recursively.
+	 * @param parentIndex the parent index that needs to be percolated down
 	 */
 	private void percDown(int parentIndex) {
 		int firstChildIndex = parentIndex * maxK + 1;
@@ -431,12 +498,11 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 
 
 	/**
-	 * switchValues
-	 * @param parentIndex
-	 * @param childIndex
-	 * @return boolean - true switch or false - no need
+	 * Switches values upwards.
+	 * @param parentIndex the index of the parent node.
+	 * @param childIndex the index of the child node.
+	 * @return boolean - true switch or false - no need. 
 	 */
-/*
 	private boolean percUp(int parentIndex, int childIndex) {
 		E parentValue = nodeList.get(parentIndex);
 		E childValue = nodeList.get(childIndex);
@@ -472,7 +538,8 @@ public class PriorityTree<E> extends SimpleKTree<E> implements Queue<E> {
 		// }
 		return false;
 	}
-*/
+
+
 	@Override
 	public E element() {
 		if (size() <= 0){

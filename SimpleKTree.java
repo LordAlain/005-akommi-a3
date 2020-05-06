@@ -8,9 +8,16 @@ import java.util.Iterator;
 //or expand/shrink your own array storage, whichever you find more fun.
 import java.util.ArrayList;
 
+/**
+ * The SimpleKTree class implements collection and forms an unsorted nodelist into a k-ary tree.
+ * @param <E> handles any object type.
+ */
 public class SimpleKTree<E> implements Collection<E> {
 	//you code here
 	//private or protected fields only
+	/**
+	 * Initializes the storage/representation for the k-tree.
+	 */
 	protected ArrayList<E> nodeList;
 
 	/**
@@ -21,6 +28,10 @@ public class SimpleKTree<E> implements Collection<E> {
 	//Notes: for this assignment, you may assume that the tree is always nearly complete
 	//this will significantly simplify both your size() and height() methods
 	
+	/**
+	 * Constructor for SimpleKTree. It initializes the nodelist.
+	 * @param k the k value for the tree.
+	 */
 	public SimpleKTree(int k) {
 		//creates an empty k-ary tree
 		//throws InvalidKException (you need to create this) if the k value is invalid (< 2)
@@ -32,6 +43,11 @@ public class SimpleKTree<E> implements Collection<E> {
 		nodeList = new ArrayList<E>();
 	}
 
+	/**
+	 * Constructor for SimpleKTree. It adds to the nodelist.
+	 * @param arrayTree The arraytree that needs to be sorted into the tree.
+	 * @param k the k value for the tree.
+	 */
 	public SimpleKTree(E[] arrayTree, int k) {
 		// creates a k-ary tree from an array (which is already in k-ary tree array
 		// representation)
@@ -53,7 +69,11 @@ public class SimpleKTree<E> implements Collection<E> {
 		}
 
 	}
-	
+
+	/**
+	 * Height of tree.
+	 * @return the height of the last index.
+	 */
 	public int height() {
 		//returns the height of the k-ary tree
 		//can be done in O(1) time... use math!
@@ -63,9 +83,9 @@ public class SimpleKTree<E> implements Collection<E> {
 	}
 	
 	/**
-	 * height of tree at index
-	 * @param index
-	 * @return
+	 * Height of tree at index.
+	 * @param index the index being measured.
+	 * @return the height at the index.
 	 */
 	protected int height(int index) {
 		//returns the height of the k-ary tree
@@ -82,9 +102,9 @@ public class SimpleKTree<E> implements Collection<E> {
 	}
 	
 	/**
-	 * height of tree at index
-	 * @param index
-	 * @return
+	 * Gets the parent of the selected index.
+	 * @param index the current index.
+	 * @return the parent of the selected index.
 	 */
 	protected int getIndexOfParent(int index) {
 
@@ -95,15 +115,21 @@ public class SimpleKTree<E> implements Collection<E> {
 		return n;
 	}
 
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public void clear() {
 		//removes all the elements from the k-ary tree
 		nodeList.clear();
 	}
 	
-	public String toString() {
-		//creates a string representation of the current tree where each element
-		//is separated by spaces
-		
+	/**
+	 * A toString method of the level-order walk of the tree.
+	 * Creates a string representation of the current tree where each element
+	 * is separated by spaces.
+	 * @return s - the string of the level-order walk of the tree
+	 */
+	public String toString() {		
 		//EXAMPLES:
 		
 		//The following is a k-ary tree of where k=2, height=2
@@ -133,9 +159,11 @@ public class SimpleKTree<E> implements Collection<E> {
 		return strLevel;
 	}
 	
+	/**
+	 * A toString method of the pre-order walk of the tree.
+	 * @return s - the string of the pre-order walk of the tree.
+	 */
 	public String toStringPreOrder() {
-		//prints out a pre-order walk of the tree
-		
 		//Examples for the k=2 and k=3 trees from toString():
 		//    k=2:  "1 2 4 5 3 6 7 "
 		//    k=3:  "1 2 5 6 7 3 8 9 10 4 "
@@ -155,7 +183,11 @@ public class SimpleKTree<E> implements Collection<E> {
 		return strLevel;
 	}
 	
-
+	/**
+	 * Recursive method for implementing toPreOrderString.
+	 * @param index the current index.
+	 * @return s - the string for toPreOrderString.
+	 */
 	private String toPreOrderString(int index){
 		String s = nodeList.get(index).toString();
 
@@ -166,8 +198,11 @@ public class SimpleKTree<E> implements Collection<E> {
 		return s;
 	}
 
+	/**
+	 * A toString method of the post-order walk of the tree.
+	 * @return s - the string of the post-order walk of the tree.
+	 */
 	public String toStringPostOrder() {
-		//prints out a post-order walk of the tree
 		
 		//Examples for the k=2 and k=3 trees from toString():
 		//    k=2:  "4 5 2 6 7 3 1 "
@@ -184,9 +219,13 @@ public class SimpleKTree<E> implements Collection<E> {
 			strLevel = toPostOrderString(0);
 		}
 		return strLevel;
-
 	}
 
+	/**
+	 * Recursive method for implementing toStringPostOrder.
+	 * @param index the current index.
+	 * @return s - the string for toStringPostOrder.
+	 */
 	private String toPostOrderString(int index){
 		String s = "";
 
@@ -201,6 +240,11 @@ public class SimpleKTree<E> implements Collection<E> {
 		return s;
 	}
 	
+	/**
+	 * Recursive method for implementing toStringPostOrder.
+	 * @param index the current index.
+	 * @return s - the string for toStringPostOrder.
+	 */
 	private String toPostOrderString2(int index){
 		String s = nodeList.get(index).toString();
 
@@ -217,14 +261,20 @@ public class SimpleKTree<E> implements Collection<E> {
 		return s;
 	}
 
-
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public int size() {
 		return nodeList.size();
 	}
-	
+
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public boolean isEmpty() {
 		return size() == 0;
 	}
+
 	//********************************************************************************
 	//   THIS SECTION IS EXTRA CREDIT. DON'T WASTE TIME ON THESE AT THE EXPENSE OF
 	//   GETTING NORMAL CREDIT FOR THE ASSIGNMENT! If you can do these in a few
@@ -232,9 +282,11 @@ public class SimpleKTree<E> implements Collection<E> {
 	//   points in the assignment. DO NOT DELETE METHODS YOU DON'T COMPLETE.
 	//********************************************************************************
 	
+	/**
+	 * creates a string representation of the current tree with line breaks after each level of the tree.
+	 * @return strLevel
+	 */
 	public String toStringWithLevels() {
-		//creates a string representation of the current tree with line breaks
-		//after each level of the tree
 		
 		//Examples for the k=2 and k=3 trees from toString():
 		
@@ -291,7 +343,10 @@ public class SimpleKTree<E> implements Collection<E> {
 	//********************************************************************************
 	// Testing code... edit this as much as you want!
 	//********************************************************************************
-	
+	/**
+	 * Main method for testing code.
+	 * @param arg no args.
+	 */
 	public static void main(String[] arg) {
 		//maybe add some yays?
 		//Construct SimpleK Object and test inputs.
@@ -311,7 +366,10 @@ public class SimpleKTree<E> implements Collection<E> {
 		//When you think you're ready for testing, uncomment this block. It's a
 		//secondary check to make sure your code compiles with the test cases used
 		//for grading.
-		
+
+		/**
+		 * Random Object Class for testing.
+		 */
 		class Banana { }
 		
 		int x;
@@ -445,52 +503,91 @@ public class SimpleKTree<E> implements Collection<E> {
 	//   DO NOT EDIT ANYTHING BELOW THIS LINE (except to add the JavaDocs)
 	//********************************************************************************
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public static class InvalidKException extends RuntimeException {};
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public boolean add(E e) {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public boolean addAll(Collection<? extends E> c) {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public boolean contains(Object o) {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public boolean containsAll(Collection<?> c) {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public boolean equals(Object o) {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public int hashCode() {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public Iterator<E> iterator() {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public boolean remove(Object o) {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public boolean removeAll(Collection<?> c) {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public boolean retainAll(Collection<?> c) {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public Object[] toArray() {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+ 	* {@inheritDoc}
+ 	*/
 	public <T> T[] toArray(T[] a) {
 		throw new UnsupportedOperationException();
 	}
